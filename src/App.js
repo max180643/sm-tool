@@ -120,16 +120,15 @@ const App = () => {
       {
         camera && (
           <>
-            <div className={"text-center"}>
+            <div className={"max-w-sm"}>
               <QrReader
                 delay={100}
                 onError={(err) => console.error(err)}
                 onScan={onScan}
-                className={"max-w-sm"}
               />
+              <p className="text-xl text-center mt-2">{msg}</p>
             </div>
             {/* Result data */}
-            <p className="text-xl text-center mt-2">{msg}</p>
             <hr className="my-2" />
           </>
         )
