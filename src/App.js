@@ -37,7 +37,7 @@ const App = () => {
 
   const [data, setData] = useState(defaultData)
 
-  const shipping = Object.keys(data)
+  const shipping = Object.keys(data).filter(word => word !== "others").sort()
 
   // localStorage
   const localName = 'smtool'
@@ -147,6 +147,7 @@ const App = () => {
             )
           )
         }
+        <p className="text-xl" key={data['others'].name}>{data['others'].name} ({data['others'].code ?? "-"}) : {data['others'].list.length} ชิ้น</p>
         <hr className="my-2" />
         <p className="text-xl">รวมทั้งหมด : {
           shipping.reduce((prev, current) => prev + data[current].list.length, 0)
