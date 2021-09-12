@@ -8,7 +8,7 @@ const App = () => {
   const [msg, setMsg] = useState("")
 
   const playDelay = 200
-  const clearDelay = 3000
+  const clearDelay = 2000
   const scanDelay = 500
   
   // data
