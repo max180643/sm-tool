@@ -6,6 +6,10 @@ const App = () => {
   const [camera, setCamera] = useState(true)
   const [lastscan, setLastscan] = useState("")
   const [msg, setMsg] = useState("")
+
+  const playDelay = 200
+  const clearDelay = 3000
+  const scanDelay = 500
   
   // data
   const defaultData = {
@@ -68,10 +72,6 @@ const App = () => {
     src: ['./sound/beep.mp3']
   });
 
-  const err = new Howl({
-    src: ['./sound/err.mp3']
-  });
-
   const onScan = (scanData) => {
     if (scanData && scanData !== lastscan) {
       beep.play()
@@ -90,7 +90,9 @@ const App = () => {
             }
           })
         } else {
-          setTimeout(()=>{err.play()}, (400));
+          setTimeout(()=>{
+            beep.play()
+          }, (playDelay));
           setMsg(`${data[brand].name} : ${trackingNumber} ซ้ำ!`)
         }
       }
@@ -108,6 +110,9 @@ const App = () => {
       }
       
       setLastscan(trackingNumber)
+      setTimeout(() => {
+        setLastscan("")
+      }, (clearDelay))
       }
     }
 
@@ -122,7 +127,7 @@ const App = () => {
           <>
             <div className={"max-w-sm"}>
               <QrReader
-                delay={100}
+                delay={scanDelay}
                 onError={(err) => console.error(err)}
                 onScan={onScan}
               />
